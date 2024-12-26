@@ -12,6 +12,7 @@ from moto.iam.models import Role as MotoRole
 from moto.iam.policy_validation import VALID_STATEMENT_ELEMENTS
 
 from localstack import config
+from localstack.constants import TAG_KEY_CUSTOM_ID
 from localstack.utils.patch import patch
 
 ADDITIONAL_MANAGED_POLICIES = {
@@ -94,9 +95,10 @@ def apply_iam_patches():
     ):
         fn(self, name, account_id, region, default_version_id, description, document, **kwargs)
         self.document = document
+        if "tags" in kwargs and TAG_KEY_CUSTOM_ID in kwargs["tags"]:
+            self.id = kwargs["tags"][TAG_KEY_CUSTOM_ID]["Value"]
 
     # patch unapply_policy
-
     @patch(InlinePolicy.unapply_policy)
     def inline_policy_unapply_policy(fn, self, backend):
         try:
