@@ -61,7 +61,7 @@ brew install localstack/tap/localstack-cli
 ```
 
 ### Binary download (macOS, Linux, Windows)
-
+## By Mudassir Alam
 If Brew is not installed on your machine, you can download the pre-built LocalStack CLI binary directly:
 
 - Visit [localstack/localstack-cli](https://github.com/localstack/localstack-cli/releases/latest) and download the latest release for your platform.
